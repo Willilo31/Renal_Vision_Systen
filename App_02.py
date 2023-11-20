@@ -1,6 +1,7 @@
 import cv2
 from ultralytics import YOLO
 import Jetson.GPIO as GPIO
+from statistics import mode
 
 def main():
         button = 13
@@ -14,6 +15,7 @@ def main():
         cap.set(cv2.CAP_PROP_FRAME_WIDTH,1280)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT,720)
         cv2.namedWindow("frame", cv2.WINDOW_NORMAL)
+
         Counter_Blue_Clamp = 0
         Counter_Pull_Ring_T = 0
         Counter_Pull_Ring_II = 0
@@ -21,6 +23,15 @@ def main():
         Counter_Red_Clamp = 0
         Counter_White_Clamp = 0
         Counter_White_Paper_Band = 0
+        #-----------------------
+        Vector_Blue_Clamp = []
+        Vector_Pull_Ring_T = []
+        Vector_Pull_Ring_II = []
+        Vector_Pull_Ring_III = []
+        Vector_Red_Clamp = []
+        Vector_White_Clamp = []
+        Vector_White_Paper_Band = []
+
         cambio = True
 
         while True:
@@ -32,7 +43,6 @@ def main():
                 results = model.predict(frame, verbose=False, agnostic_nms=True, conf=0.25, imgsz=1280)
                 if not GPIO.input(button):
                         if cambio == True:
-                                cambio = False
                                 if results is not None:
                                         for result in results:
                                                 if result.boxes:
@@ -83,16 +93,14 @@ def main():
                                                         Counter_Red_Clamp = 0
                                                         Counter_White_Clamp = 0
                                                         Counter_White_Paper_Band = 0
-
-                                print(f'----------------------')
-                                print(f'Blue_Clamp:-------->{Counter_Blue_Clamp}/1')
-                                print(f'Pull_Ring_T:------->{Counter_Pull_Ring_T}/4')
-                                print(f'Pull_Ring_II:------>{Counter_Pull_Ring_II}/1')
-                                print(f'Pull_Ring_III:----->{Counter_Pull_Ring_III}/1')
-                                print(f'Red_Clamp:--------->{Counter_Red_Clamp}/1')
-                                print(f'White_Clamp:------->{Counter_White_Clamp}/3')
-                                print(f'White_Paper_Band:-->{Counter_White_Paper_Band}/2')
-                                print(f'----------------------')
+                                
+                                Vector_Blue_Clamp.append(Counter_Blue_Clamp)
+                                Vector_Pull_Ring_T.append(Counter_Pull_Ring_T)
+                                Vector_Pull_Ring_II.append(Counter_Pull_Ring_II)
+                                Vector_Pull_Ring_III.append(Counter_Pull_Ring_III)
+                                Vector_Red_Clamp.append(Counter_Red_Clamp)
+                                Vector_White_Clamp.append(Counter_White_Clamp)
+                                Vector_White_Paper_Band.append(Counter_White_Paper_Band)
 
                                 Counter_Blue_Clamp = 0
                                 Counter_Pull_Ring_T = 0
@@ -101,6 +109,18 @@ def main():
                                 Counter_Red_Clamp = 0
                                 Counter_White_Clamp = 0
                                 Counter_White_Paper_Band = 0
+                                
+                                if len(Vector_Blue_Clamp) >= 10:
+                                        cambio = False
+                                        print(f'----------------------')                                   
+                                        print(f'Blue_Clamp:-------->{mode(Counter_Blue_Clamp)}/1')
+                                        print(f'Pull_Ring_T:------->{mode(Counter_Pull_Ring_T)}/4')
+                                        print(f'Pull_Ring_II:------>{mode(Counter_Pull_Ring_II)}/1')
+                                        print(f'Pull_Ring_III:----->{mode(Counter_Pull_Ring_III)}/1')
+                                        print(f'Red_Clamp:--------->{mode(Counter_Red_Clamp)}/1')
+                                        print(f'White_Clamp:------->{mode(Counter_White_Clamp)}/3')
+                                        print(f'White_Paper_Band:-->{mode(Counter_White_Paper_Band)}/2')
+                                        print(f'----------------------')
                 else:
                         cambio = True
                 cv2.imshow("frame", frame)
