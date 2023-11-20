@@ -27,14 +27,14 @@ def main():
         if not ret:
             continue
 
-        results = model.predict(frame, verbose=False, agnostic_nms=True, conf=0.50, imgsz=640)
+        results = model.predict(frame, verbose=False, agnostic_nms=True, conf=0.50, imgsz=1280)
         if not GPIO.input(button):
               if cambio == True:
                     cambio = False
                     print("BOTON PRESIONADO")
         else:
               cambio = True
-              
+
         if results is not None:
             for result in results:
                 if result.boxes:

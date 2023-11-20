@@ -11,6 +11,8 @@ def main():
         GPIO.setup(button, GPIO.IN)
 
         cap = cv2.VideoCapture(0)
+        cap.set(cv2.CAP_PROP_FRAME_WIDTH,1280)
+        cap.set(cv2.CAP_PROP_FRAME_HEIGHT,720)
         cv2.namedWindow("frame", cv2.WINDOW_NORMAL)
         Counter_Blue_Clamp = 0
         Counter_Pull_Ring_T = 0
@@ -27,7 +29,7 @@ def main():
                 if not ret:
                         continue
 
-                results = model.predict(frame, verbose=False, agnostic_nms=True, conf=0.50, imgsz=640)
+                results = model.predict(frame, verbose=False, agnostic_nms=True, conf=0.25, imgsz=1280)
                 if not GPIO.input(button):
                         if cambio == True:
                                 cambio = False
@@ -82,23 +84,23 @@ def main():
                                                         Counter_White_Clamp = 0
                                                         Counter_White_Paper_Band = 0
 
-                        print(f'----------------------')
-                        print(f'Blue_Clamp:-------->{Counter_Blue_Clamp}/1')
-                        print(f'Pull_Ring_T:------->{Counter_Pull_Ring_T}/4')
-                        print(f'Pull_Ring_II:------>{Counter_Pull_Ring_II}/1')
-                        print(f'Pull_Ring_III:----->{Counter_Pull_Ring_III}/1')
-                        print(f'Red_Clamp:--------->{Counter_Red_Clamp}/1')
-                        print(f'White_Clamp:------->{Counter_White_Clamp}/3')
-                        print(f'White_Paper_Band:-->{Counter_White_Paper_Band}/2')
-                        print(f'----------------------')
+                                print(f'----------------------')
+                                print(f'Blue_Clamp:-------->{Counter_Blue_Clamp}/1')
+                                print(f'Pull_Ring_T:------->{Counter_Pull_Ring_T}/4')
+                                print(f'Pull_Ring_II:------>{Counter_Pull_Ring_II}/1')
+                                print(f'Pull_Ring_III:----->{Counter_Pull_Ring_III}/1')
+                                print(f'Red_Clamp:--------->{Counter_Red_Clamp}/1')
+                                print(f'White_Clamp:------->{Counter_White_Clamp}/3')
+                                print(f'White_Paper_Band:-->{Counter_White_Paper_Band}/2')
+                                print(f'----------------------')
 
-                        Counter_Blue_Clamp = 0
-                        Counter_Pull_Ring_T = 0
-                        Counter_Pull_Ring_II = 0
-                        Counter_Pull_Ring_III = 0
-                        Counter_Red_Clamp = 0
-                        Counter_White_Clamp = 0
-                        Counter_White_Paper_Band = 0
+                                Counter_Blue_Clamp = 0
+                                Counter_Pull_Ring_T = 0
+                                Counter_Pull_Ring_II = 0
+                                Counter_Pull_Ring_III = 0
+                                Counter_Red_Clamp = 0
+                                Counter_White_Clamp = 0
+                                Counter_White_Paper_Band = 0
                 else:
                         cambio = True
                 cv2.imshow("frame", frame)

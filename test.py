@@ -1,7 +1,7 @@
 import cv2
 from ultralytics import YOLO
 
-model = YOLO('Renal_Model_S1.pt')
+model = YOLO('Renal_Model_S3.pt')
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH,1280)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT,720)
