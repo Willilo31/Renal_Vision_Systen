@@ -16,6 +16,7 @@ def main():
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT,720)
         cv2.namedWindow("frame", cv2.WINDOW_NORMAL)
 
+        #Variables
         Counter_Blue_Clamp = 0
         Counter_Pull_Ring_T = 0
         Counter_Pull_Ring_II = 0
@@ -23,7 +24,8 @@ def main():
         Counter_Red_Clamp = 0
         Counter_White_Clamp = 0
         Counter_White_Paper_Band = 0
-        #-----------------------
+
+        #Vector
         Vector_Blue_Clamp = []
         Vector_Pull_Ring_T = []
         Vector_Pull_Ring_II = []
@@ -112,15 +114,15 @@ def main():
                                 
                                 if len(Vector_Blue_Clamp) >= 10:
                                         cambio = False
-                                        print(f'----------------------')                                   
-                                        print(f'Blue_Clamp:-------->{mode(Counter_Blue_Clamp)}/1')
-                                        print(f'Pull_Ring_T:------->{mode(Counter_Pull_Ring_T)}/4')
-                                        print(f'Pull_Ring_II:------>{mode(Counter_Pull_Ring_II)}/1')
-                                        print(f'Pull_Ring_III:----->{mode(Counter_Pull_Ring_III)}/1')
-                                        print(f'Red_Clamp:--------->{mode(Counter_Red_Clamp)}/1')
-                                        print(f'White_Clamp:------->{mode(Counter_White_Clamp)}/3')
-                                        print(f'White_Paper_Band:-->{mode(Counter_White_Paper_Band)}/2')
-                                        print(f'----------------------')
+                                        print(f'======================')                                   
+                                        print(f'Blue_Clamp:-------->{mode(Vector_Blue_Clamp)}/1')
+                                        print(f'Pull_Ring_T:------->{mode(Vector_Pull_Ring_T)}/4')
+                                        print(f'Pull_Ring_II:------>{mode(Vector_Pull_Ring_II)}/1')
+                                        print(f'Pull_Ring_III:----->{mode(Vector_Pull_Ring_III)}/1')
+                                        print(f'Red_Clamp:--------->{mode(Vector_Red_Clamp)}/1')
+                                        print(f'White_Clamp:------->{mode(Vector_White_Clamp)}/3')
+                                        print(f'White_Paper_Band:-->{mode(Vector_White_Paper_Band)}/2')
+                                        print(f'======================')                                   
                 else:
                         cambio = True
                 cv2.imshow("frame", frame)
