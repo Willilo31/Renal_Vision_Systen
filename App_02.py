@@ -122,7 +122,14 @@ def main():
                                         print(f'Red_Clamp:--------->{mode(Vector_Red_Clamp)}/1')
                                         print(f'White_Clamp:------->{mode(Vector_White_Clamp)}/3')
                                         print(f'White_Paper_Band:-->{mode(Vector_White_Paper_Band)}/2')
-                                        print(f'======================')                                   
+                                        print(f'======================')                      
+                                        Vector_Blue_Clamp = []
+                                        Vector_Pull_Ring_T = []
+                                        Vector_Pull_Ring_II = []
+                                        Vector_Pull_Ring_III = []
+                                        Vector_Red_Clamp = []
+                                        Vector_White_Clamp = []
+                                        Vector_White_Paper_Band = []             
                 else:
                         cambio = True
                 cv2.imshow("frame", frame)
