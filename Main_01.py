@@ -13,7 +13,7 @@ Salida = 11
 energy_cut = 13
 
 def visualizar():
-    global model, cap, frame, class_names
+    global inicio, model, cap, frame, class_names
 
     if inicio == 1:
         model = YOLO("Renal_Model_S2.pt")
@@ -76,7 +76,7 @@ Close_Button.place(x = 1794, y = 55)
 
 lblVideo = tk.Label(pantalla)
 lblVideo.configure(borderwidth=0)
-lblVideo.place(x = 180, y = 100)
+lblVideo.place(x = 157, y = 259)
 inicio = 1
 
 visualizar()
