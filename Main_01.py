@@ -69,6 +69,9 @@ root.attributes('-fullscreen', True)
 pantalla = tk.Canvas(root, width=1920, height=1080, bg="#FFFFFF")
 pantalla.pack()
 
+text_c = pantalla.create_text(818, 430, text="18457.1016", font=("Helvetica", 24), fill="black")
+text_c.pack()
+
 #Boton de cerrado
 Close = tk.PhotoImage(file="IMG/shutdown.png")
 Close_Button = tk.Button(pantalla, image=Close, bg="#FFFFFF", command=turn_off_action, borderwidth=0, relief="flat")
