@@ -67,9 +67,9 @@ def main():
                 if not ret_Insertion:
                         continue
 
-                results_Missing = model_Missing.predict(frame_Missing, verbose=False, agnostic_nms=True, conf=0.25, imgsz=1280)
+                results_Missing = model_Missing.predict(frame_Missing, verbose=True, agnostic_nms=True, conf=0.25, imgsz=1280)
 
-                results_Insertion = model_Insertion.predict(frame_Insertion, verbose=False, agnostic_nms=True, conf=0.50, imgsz=1280)
+                results_Insertion = model_Insertion.predict(frame_Insertion, verbose=True, agnostic_nms=True, conf=0.50, imgsz=640)
 
                 if not GPIO.input(button):
                         if cambio == True:
