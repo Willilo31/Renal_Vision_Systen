@@ -41,8 +41,9 @@ def main():
 
                 if not ret:
                         continue
-
-                results = model.predict(frame, verbose=False, agnostic_nms=True, conf=0.25, imgsz=1280)
+                frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                
+                results = model.predict(frame, verbose=True, agnostic_nms=True, conf=0.25, imgsz=1280)
                 if not GPIO.input(button):
                         if cambio == True:
                                 if results is not None:
@@ -136,8 +137,9 @@ def main():
                 if (cv2.waitKey(1) & 0xFF == ord('q')):
                         cv2.destroyAllWindows()
                         break
+
 if __name__=="__main__":
-    main()
+        main()
 
 # Blue_Clamp → 1
 # Pull_Ring_T → 4 

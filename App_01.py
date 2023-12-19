@@ -27,7 +27,7 @@ def main():
         if not ret:
             continue
 
-        results = model.predict(frame, verbose=False, agnostic_nms=True, conf=0.50, imgsz=1280)
+        results = model.predict(frame, verbose=True, gnostic_nms=True, conf=0.50, imgsz=416)
         if not GPIO.input(button):
               if cambio == True:
                     cambio = False
