@@ -4,16 +4,16 @@ cap1 = cv2.VideoCapture(0)
 cap2 = cv2.VideoCapture(4)
 cap3 = cv2.VideoCapture(6)
 
-cap1.set(cv2.CAP_PROP_FRAME_WIDTH,640)
-cap1.set(cv2.CAP_PROP_FRAME_HEIGHT,480)
+cap1.set(cv2.CAP_PROP_FRAME_WIDTH,320)
+cap1.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
 cv2.namedWindow("Frame_1", cv2.WINDOW_NORMAL)
 
-cap2.set(cv2.CAP_PROP_FRAME_WIDTH,416)
-cap2.set(cv2.CAP_PROP_FRAME_HEIGHT,380)
+cap2.set(cv2.CAP_PROP_FRAME_WIDTH,640)
+cap2.set(cv2.CAP_PROP_FRAME_HEIGHT,360)
 cv2.namedWindow("Frame_2", cv2.WINDOW_NORMAL)
 
 cap3.set(cv2.CAP_PROP_FRAME_WIDTH,640)
-cap3.set(cv2.CAP_PROP_FRAME_HEIGHT,480)
+cap3.set(cv2.CAP_PROP_FRAME_HEIGHT,360)
 cv2.namedWindow("Frame_3", cv2.WINDOW_NORMAL)
 
 while True:
