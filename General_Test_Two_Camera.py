@@ -3,11 +3,11 @@ from ultralytics import YOLO
 import time
 
 model = YOLO('Models/Missing_Component_S5.pt')
-model2 = YOLO('Models/Missing_Component_S4.pt')
+model2 = YOLO('Models/Welding_Insertion_S02.pt')
 
 cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
 cap2 = cv2.VideoCapture(2)
 cap2.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
@@ -24,7 +24,7 @@ while cap.isOpened():
     if success:
         new_frame_time = time.time()
 
-        results = model(frame, device=0, imgsz=640, conf=0.50, agnostic_nms=True)
+        results = model(frame, device=0, imgsz=1280, conf=0.50, agnostic_nms=True)
         results2 = model2(frame2, device=0, imgsz=640, conf=0.50, agnostic_nms=True)
 
         annotated_frame = results[0].plot()
