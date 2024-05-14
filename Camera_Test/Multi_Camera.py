@@ -30,18 +30,18 @@ if __name__ == "__main__":
 
     process1 = Process(target=process_video, args=(11, url1,))
     process2 = Process(target=process_video, args=(12, url2,))
-    process3 = Process(target=process_video, args=(13, url3,))
-    process4 = Process(target=process_video, args=(14, url4,))
-    process5 = Process(target=process_video, args=(15, url5,))
+    process3 = Process(target=process_video, args=("USB", 0,))
+    process4 = Process(target=process_video, args=("USB2", 4,))
+    # process5 = Process(target=process_video, args=(15, url5,))
 
     process1.start()
     process2.start()
     process3.start()
     process4.start()
-    process5.start()
+    # process5.start()
 
     process1.join()
     process2.join()
     process3.join()
     process4.join()
-    process5.join()
+    # process5.join()

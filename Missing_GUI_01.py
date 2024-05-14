@@ -15,15 +15,16 @@ def visualizar():
     if inicio == 1:
         inicio = 0
         button = 13
-        model = YOLO("Renal_Model_S5.pt")
+        model = YOLO("Models/Missing_Component_S5.pt")
 
         class_names = ["Blue_Clamp", "Pull_Ring_T", "Pull_Ring_II", "Pull_Ring_III", "Red_Clamp", "White_Clamp", "White_Paper_Band"]
-        cap = cv2.VideoCapture(6)
+        cap = cv2.VideoCapture(2)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH,1280)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT,720)        
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(button, GPIO.IN)
+
         #Variables
         Counter_Blue_Clamp = 0
         Counter_Pull_Ring_T = 0
@@ -33,6 +34,7 @@ def visualizar():
         Counter_White_Clamp = 0
         Counter_White_Paper_Band = 0
         camera_id = 0
+        
         #Vector
         Vector_Blue_Clamp = []
         Vector_Pull_Ring_T = []
@@ -66,8 +68,7 @@ def visualizar():
                                         cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 4)
                                         cv2.putText(frame, f"{class_names[class_id]}",(x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2,)
                                         Counter_Blue_Clamp+=1
-                                        cv2.imshow("frame2", frame)
-                                    
+                                                                            
                                     if class_id == 1: #Pull_Ring_T
                                         cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 4)
                                         cv2.putText(frame, f"{class_names[class_id]}",(x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2,)
@@ -90,7 +91,9 @@ def visualizar():
 
                                     if class_id == 5: #White_Clamp
                                         cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 4)
-                                        Counter_White_Clamp+=1 #Como puedo hacer que la linea de cv2.line sea en la parte superior, porque ahora mismo la esta haciendo diagonal
+                                        cv2.putText(frame, f"{class_names[class_id]}",(x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2,)
+                                        Counter_White_Clamp+=1
+                                        
                                     if class_id == 6: #White_Paper_Band
                                         cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 4)
                                         cv2.putText(frame, f"{class_names[class_id]}",(x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2,)
@@ -126,7 +129,7 @@ def visualizar():
                     Counter_White_Paper_Band = 0
                     
                     if len(Vector_Blue_Clamp) >= 5:
-                        cambio = False
+                        cambio = True #Cambio debe de ser falso
 
                         pantalla.delete(Text_Blue_Clamp, Text_Pull_Ring_T, Text_Pull_Ring_II, Text_Pull_Ring_III, Text_Red_Clamp, Text_White_Clamp, Text_White_Paper_Band)
                         

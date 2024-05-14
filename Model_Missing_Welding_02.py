@@ -5,8 +5,8 @@ from statistics import mode
 
 def main():
         button = 13
-        model_Missing= YOLO("Renal_Model_S5.pt")
-        model_Insertion= YOLO("Insertion_S02.pt")
+        model_Missing= YOLO("Models/Missing_Component_S5.pt")
+        model_Insertion= YOLO("Models/Welding_Insertion_S02.pt")
 
         class_names_Missing = ["Blue_Clamp", "Pull_Ring_T", "Pull_Ring_II", "Pull_Ring_III", "Red_Clamp", "White_Clamp", "White_Paper_Band"]
         class_names_Insertion = ["Complete", "Good", "Incomplete"]
@@ -66,9 +66,9 @@ def main():
                 if not ret_Insertion:
                         continue
 
-                results_Missing = model_Missing.predict(frame_Missing, verbose=True, agnostic_nms=True, conf=0.25, imgsz=1280)
+                results_Missing = model_Missing.predict(frame_Missing, verbose=True, agnostic_nms=True, conf=0.50, imgsz=640)
 
-                results_Insertion = model_Insertion.predict(frame_Insertion, verbose=True, agnostic_nms=True, conf=0.50, imgsz=640)
+                results_Insertion = model_Insertion.predict(frame_Insertion, verbose=True, agnostic_nms=True, conf=0.25, imgsz=1280)
 
                 if not GPIO.input(button):
                         if cambio == True:

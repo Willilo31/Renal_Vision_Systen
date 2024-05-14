@@ -5,13 +5,13 @@ from statistics import mode
 
 def main():
         button = 13
-        model = YOLO("Renal_Model_S2.pt")
+        model = YOLO("Models/Missing_Component_S5.pt")
         class_names = ["Blue_Clamp", "Pull_Ring_T", "Pull_Ring_II", "Pull_Ring_III", "Red_Clamp", "White_Clamp", "White_Paper_Band"]
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(button, GPIO.IN)
 
-        cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture(2)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH,1280)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT,720)
         cv2.namedWindow("frame", cv2.WINDOW_NORMAL)
@@ -41,7 +41,7 @@ def main():
 
                 if not ret:
                         continue
-                frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
                 
                 results = model.predict(frame, verbose=True, agnostic_nms=True, conf=0.25, imgsz=1280)
                 if not GPIO.input(button):
@@ -114,7 +114,7 @@ def main():
                                 Counter_White_Paper_Band = 0
                                 
                                 if len(Vector_Blue_Clamp) >= 10:
-                                        cambio = False
+                                        cambio = True #cambio = False
                                         print(f'======================')                                   
                                         print(f'Blue_Clamp:-------->{mode(Vector_Blue_Clamp)}/1')
                                         print(f'Pull_Ring_T:------->{mode(Vector_Pull_Ring_T)}/4')
